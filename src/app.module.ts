@@ -1,29 +1,11 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule as AppConfigModule } from './config/config.module';
-import { getOrmConfig } from './config/orm.config';
-import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
-import { AccountsModule } from './accounts/accounts.module';
-import { TransactionsModule } from './transactions/transactions.module';
-import { LoansModule } from './loans/loans.module';
-
+import { AppController } from './app.controller';
+import { V1Module } from './v1/v1.module';
 @Module({
   imports: [
-    AppConfigModule,
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => getOrmConfig(configService),
-      inject: [ConfigService],
-    }),
-    AuthModule,
-    UsersModule,
-    AccountsModule,
-    TransactionsModule,
-    LoansModule,
+
+    V1Module
   ],
   controllers: [AppController],
   providers: [AppService],
