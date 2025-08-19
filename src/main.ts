@@ -4,14 +4,18 @@ import { VersioningType } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
   app.setGlobalPrefix('api');
   app.enableVersioning({
     type: VersioningType.URI,
     defaultVersion: '1',
   });
+  app.enableCors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  });
   const port = process.env.PORT ?? 3000;
-  console.log(`Server is running on port ${port} api version ${1}`);
   await app.listen(port);
+  console.log(`Server is running on port ${port}`);
 }
 bootstrap();
