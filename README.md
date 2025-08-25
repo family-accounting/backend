@@ -1,352 +1,98 @@
-# Family Finance Manager
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+</p>
 
-A comprehensive NestJS application for managing family finances with role-based access control, multi-currency support, and transaction tracking.
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-## 🚀 Features
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-### Core Functionality
-- **User Management**: Family members with different roles (Admin, Member, Viewer)
-- **Account Management**: Multiple accounts per user (Cash/Bank) with different currencies
-- **Transaction Tracking**: Income, expenses, internal transfers, loans, and repayments
-- **Loan Management**: Track lending/borrowing between family members
-- **Multi-currency Support**: IRR, USD, EUR, INR with exchange rate tracking
+## Description
 
-### Security & Access Control
-- **JWT Authentication**: Secure login and session management
-- **Role-based Access Control**: Different permissions for Admin, Member, and Viewer roles
-- **Data Isolation**: Users can only access their own data (unless Admin)
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-### Business Logic
-- **Automatic Balance Updates**: Account balances update automatically with transactions
-- **Internal Transfers**: Redistribute money between family members without affecting total assets
-- **Loan Tracking**: Monitor pending and paid loans with due dates
-- **Transaction History**: Comprehensive logging of all financial activities
-
-## 🛠 Tech Stack
-
-- **Backend**: NestJS + TypeScript
-- **Database**: PostgreSQL with TypeORM
-- **ORM**: TypeORM with automatic migrations
-- **Authentication**: JWT + Passport.js
-- **Validation**: class-validator + class-transformer
-- **Password Hashing**: bcryptjs
-
-## 📁 Project Structure
-
-```
-src/
-├── auth/                 # Authentication & JWT management
-├── users/               # User management & roles
-├── accounts/            # Account management & balances
-├── transactions/        # Transaction tracking & history
-├── loans/              # Loan management & tracking
-├── common/              # Shared decorators & guards
-└── config/              # Configuration & database setup
-```
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js (v18+)
-- npm or bun
-- PostgreSQL (v12+)
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd family-finance
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   # or
-   bun install
-   ```
-
-3. **Setup PostgreSQL Database**
-   ```bash
-   # Create database
-   createdb family_finance
-   
-   # Or using psql
-   psql -U postgres
-   CREATE DATABASE family_finance;
-   \q
-   ```
-
-4. **Environment Configuration**
-   Create a `.env` file in the root directory:
-   ```env
-   # JWT Configuration
-   JWT_SECRET=your-super-secret-jwt-key-here
-   
-   # PostgreSQL Database Configuration
-   DB_HOST=localhost
-   DB_PORT=5432
-   DB_USERNAME=postgres
-   DB_PASSWORD=password
-   DB_NAME=family_finance
-   DB_SYNC=false
-   DB_LOGGING=false
-   ```
-
-5. **Run the application**
-   ```bash
-   # Development mode
-   npm run start:dev
-   
-   # Production mode
-   npm run build
-   npm run start:prod
-   ```
-
-6. **Access the API**
-   - API Base URL: `http://localhost:3000`
-   - Swagger Documentation: `http://localhost:3000/api` (if configured)
-
-## 🗄️ Database Setup
-
-### PostgreSQL Configuration
-The application uses PostgreSQL as the primary database. Make sure you have:
-
-1. **PostgreSQL installed** (version 12 or higher)
-2. **Database created**: `family_finance`
-3. **User permissions** configured properly
-
-### Environment Variables
-Required database environment variables:
-```env
-DB_HOST=localhost          # Database host
-DB_PORT=5432              # Database port
-DB_USERNAME=postgres      # Database username
-DB_PASSWORD=password      # Database password
-DB_NAME=family_finance    # Database name
-DB_SYNC=false             # Set to false in production
-DB_LOGGING=false          # Enable SQL logging for debugging
-```
-
-### Database Migrations
-For production environments, use migrations instead of auto-sync:
-```bash
-# Generate migration
-npm run typeorm:generate-migration
-
-# Run migrations
-npm run typeorm:run-migrations
-
-# Revert migration
-npm run typeorm:revert-migration
-```
-
-## 🔐 Authentication
-
-### User Roles
-
-- **ADMIN**: Full access to all features and data
-- **MEMBER**: Can manage own accounts, transactions, and loans
-- **VIEWER**: Read-only access to family data
-
-### API Endpoints
-
-#### Public Endpoints
-- `POST /auth/signup` - User registration
-- `POST /auth/login` - User authentication
-
-#### Protected Endpoints
-- `GET /auth/profile` - Get user profile
-- `POST /auth/refresh` - Refresh JWT token
-
-## 📊 API Endpoints
-
-### Users
-- `GET /users` - List all users (Admin/Member only)
-- `GET /users/family-members` - List family members (all roles)
-- `GET /users/:id` - Get user details
-- `PATCH /users/:id` - Update user profile
-- `PATCH /users/:id/role` - Change user role (Admin only)
-- `DELETE /users/:id` - Delete user (Admin only)
-
-### Accounts
-- `POST /accounts` - Create new account
-- `GET /accounts` - List user accounts
-- `GET /accounts/by-currency/:currency` - Filter by currency
-- `GET /accounts/balance/:currency` - Get total balance by currency
-- `GET /accounts/:id` - Get account details
-- `PATCH /accounts/:id` - Update account
-- `DELETE /accounts/:id` - Delete account
-
-### Transactions
-- `POST /transactions` - Create transaction
-- `POST /transactions/internal-transfer` - Create internal transfer (Admin only)
-- `GET /transactions` - List transactions
-- `GET /transactions/by-type/:type` - Filter by transaction type
-- `GET /transactions/by-date-range` - Filter by date range
-- `GET /transactions/:id` - Get transaction details
-- `PATCH /transactions/:id` - Update transaction
-- `DELETE /transactions/:id` - Delete transaction (Admin only)
-
-### Loans
-- `POST /loans` - Create loan
-- `GET /loans` - List loans
-- `GET /loans/pending` - List pending loans
-- `GET /loans/overdue` - List overdue loans
-- `GET /loans/summary` - Get loan summary
-- `GET /loans/:id` - Get loan details
-- `PATCH /loans/:id` - Update loan
-- `PATCH /loans/:id/mark-paid` - Mark loan as paid
-- `DELETE /loans/:id` - Delete loan (Admin only)
-
-## 💰 Transaction Types
-
-- **INCOME**: Money received (increases account balance)
-- **EXPENSE**: Money spent (decreases account balance)
-- **INTERNAL_TRANSFER**: Money moved between family members
-- **LOAN**: Money lent to another family member
-- **REPAYMENT**: Loan repayment received
-
-## 🏦 Account Types
-
-- **CASH**: Physical cash accounts
-- **BANK**: Bank account or digital wallet
-
-## 💱 Supported Currencies
-
-- **IRR** (Iranian Rial)
-- **USD** (US Dollar)
-- **EUR** (Euro)
-- **INR** (Indian Rupee)
-
-## 🔒 Security Features
-
-- **Password Hashing**: All passwords are hashed using bcrypt
-- **JWT Tokens**: Secure authentication with configurable expiration
-- **Role-based Access**: Granular permissions based on user roles
-- **Data Validation**: Input validation using class-validator
-- **SQL Injection Protection**: TypeORM provides built-in protection
-
-## 🧪 Testing
+## Project setup
 
 ```bash
-# Unit tests
-npm run test
-
-# E2E tests
-npm run test:e2e
-
-# Test coverage
-npm run test:cov
+$ npm install
 ```
 
-## 📝 Database Schema
-
-### Users Table
-- `id` (UUID, Primary Key)
-- `email` (Unique)
-- `password` (Hashed)
-- `name`
-- `role` (ADMIN/MEMBER/VIEWER)
-- `isActive`
-- `createdAt`
-- `updatedAt`
-
-### Accounts Table
-- `id` (UUID, Primary Key)
-- `name`
-- `type` (CASH/BANK)
-- `currency` (IRR/USD/EUR/INR)
-- `balance` (Decimal)
-- `description`
-- `userId` (Foreign Key)
-- `isActive`
-- `createdAt`
-- `updatedAt`
-
-### Transactions Table
-- `id` (UUID, Primary Key)
-- `type` (INCOME/EXPENSE/INTERNAL_TRANSFER/LOAN/REPAYMENT)
-- `amount` (Decimal)
-- `currency`
-- `exchangeRate` (Nullable)
-- `description`
-- `transactionDate`
-- `sourceUserId` (Foreign Key)
-- `targetUserId` (Foreign Key, Nullable)
-- `accountId` (Foreign Key)
-- `createdAt`
-- `updatedAt`
-
-### Loans Table
-- `id` (UUID, Primary Key)
-- `amount` (Decimal)
-- `currency`
-- `status` (PENDING/PAID)
-- `description`
-- `dueDate` (Nullable)
-- `paidAt` (Nullable)
-- `lenderId` (Foreign Key)
-- `borrowerId` (Foreign Key)
-- `accountId` (Foreign Key, Nullable)
-- `createdAt`
-- `updatedAt`
-
-## 🚀 Deployment
-
-### Environment Variables
-Set the following environment variables for production:
-
-```env
-NODE_ENV=production
-JWT_SECRET=your-production-jwt-secret
-DB_HOST=your-production-db-host
-DB_PORT=5432
-DB_USERNAME=your-production-db-user
-DB_PASSWORD=your-production-db-password
-DB_NAME=family_finance
-DB_SYNC=false
-DB_LOGGING=false
-```
-
-### Database Migration
-For production, set `DB_SYNC=false` and use proper database migrations:
+## Compile and run the project
 
 ```bash
-# Generate migration
-npm run typeorm:generate-migration
+# development
+$ npm run start
 
-# Run migrations
-npm run typeorm:run-migrations
+# watch mode
+$ npm run start:dev
+
+# production mode
+$ npm run start:prod
 ```
 
-## 🤝 Contributing
+## Run tests
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Ensure all tests pass
-6. Submit a pull request
+```bash
+# unit tests
+$ npm run test
 
-## 📄 License
+# e2e tests
+$ npm run test:e2e
 
-This project is licensed under the MIT License.
+# test coverage
+$ npm run test:cov
+```
 
-## 🆘 Support
+## Deployment
 
-For support and questions:
-- Create an issue in the repository
-- Contact the development team
-- Check the API documentation
+When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
 
-## 🔮 Future Enhancements
+If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
 
-- **Dashboard**: Visual financial overview and charts
-- **Budget Planning**: Monthly/yearly budget management
-- **Expense Categories**: Categorize transactions for better tracking
-- **Reports**: Generate financial reports and summaries
-- **Mobile App**: React Native or Flutter mobile application
-- **Real-time Updates**: WebSocket integration for live updates
-- **Export Features**: Export data to CSV/PDF formats
-- **Multi-language Support**: Internationalization support
+```bash
+$ npm install -g @nestjs/mau
+$ mau deploy
+```
+
+With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+
+## Resources
+
+Check out a few resources that may come in handy when working with NestJS:
+
+- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
+- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
+- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
+- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
+- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
+- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
+- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
+- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+
+## Support
+
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+
+## Stay in touch
+
+- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
+
+## License
+
+Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
