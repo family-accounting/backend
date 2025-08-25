@@ -1,98 +1,211 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🏠 سیستم حسابداری خانوادگی
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## 📋 معرفی پروژه
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+سیستم حسابداری خانوادگی یک اپلیکیشن بک‌اند قدرتمند است که با استفاده از **NestJS** و **TypeScript** توسعه یافته است. این سیستم به خانواده‌ها کمک می‌کند تا امور مالی خود را به صورت منظم و کارآمد مدیریت کنند.
 
-## Description
+## ✨ ویژگی‌های اصلی
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### 🔐 مدیریت احراز هویت و امنیت
+- **احراز هویت JWT**: سیستم امن ورود و ثبت‌نام
+- **مدیریت نقش‌ها و مجوزها**: کنترل دسترسی کاربران
+- **رمزنگاری امن**: استفاده از bcrypt برای رمزهای عبور
 
-## Project setup
+### 💰 مدیریت مالی
+- **حساب‌های بانکی**: مدیریت حساب‌های مختلف
+- **تراکنش‌ها**: ثبت و پیگیری تمام تراکنش‌های مالی
+- **دسته‌بندی‌ها**: سازماندهی تراکنش‌ها بر اساس نوع
+- **برچسب‌ها**: دسته‌بندی دقیق‌تر تراکنش‌ها
 
+### 📊 بودجه‌بندی و گزارش‌گیری
+- **مدیریت بودجه**: تعیین و پیگیری بودجه‌های ماهانه
+- **گزارش‌های مالی**: تحلیل وضعیت مالی خانواده
+- **داشبورد تحلیلی**: نمایش آمار و نمودارهای مالی
+
+### 🎯 اهداف مالی
+- **تعیین اهداف**: تعریف اهداف مالی کوتاه و بلند مدت
+- **پیگیری پیشرفت**: نظارت بر دستیابی به اهداف
+- **هشدارها**: یادآوری برای اهداف مالی
+
+### 💳 وام‌ها و بدهی‌ها
+- **مدیریت وام‌ها**: ثبت وام‌های دریافتی و پرداختی
+- **پیگیری بدهی‌ها**: مدیریت بدهی‌ها و طلب‌ها
+- **محاسبه اقساط**: محاسبه خودکار اقساط وام
+
+### 📈 سرمایه‌گذاری
+- **مدیریت سرمایه‌گذاری**: ثبت انواع سرمایه‌گذاری‌ها
+- **پیگیری سود و زیان**: محاسبه بازدهی سرمایه‌گذاری‌ها
+- **تحلیل ریسک**: ارزیابی ریسک سرمایه‌گذاری‌ها
+
+### 🏠 هزینه‌های مشترک
+- **تقسیم هزینه‌ها**: مدیریت هزینه‌های مشترک خانواده
+- **محاسبه سهم هر فرد**: تعیین سهم هر عضو خانواده
+- **تسویه حساب**: پیگیری بدهی‌ها و طلب‌های بین اعضا
+
+### 🔄 تراکنش‌های تکراری
+- **اتوماسیون**: ثبت خودکار تراکنش‌های ماهانه
+- **یادآوری**: هشدار برای تراکنش‌های تکراری
+- **مدیریت آسان**: تنظیم و تغییر تراکنش‌های تکراری
+
+### 🔔 سیستم اعلان‌ها
+- **هشدارهای مالی**: اطلاع‌رسانی درباره وضعیت مالی
+- **یادآوری اهداف**: هشدار برای اهداف مالی
+- **اعلان تراکنش‌ها**: اطلاع‌رسانی درباره تراکنش‌های جدید
+
+## 🏗️ معماری سیستم
+
+### ماژول‌های اصلی
+- **AuthModule**: مدیریت احراز هویت و مجوزها
+- **UsersModule**: مدیریت کاربران و پروفایل‌ها
+- **AccountsModule**: مدیریت حساب‌های بانکی
+- **TransactionsModule**: مدیریت تراکنش‌های مالی
+- **CategoriesModule**: دسته‌بندی تراکنش‌ها
+- **TagsModule**: برچسب‌گذاری تراکنش‌ها
+- **BudgetsModule**: مدیریت بودجه‌ها
+- **ReportsModule**: تولید گزارش‌های مالی
+- **GoalsModule**: مدیریت اهداف مالی
+- **LoansModule**: مدیریت وام‌ها
+- **DebtsModule**: مدیریت بدهی‌ها
+- **InvestmentsModule**: مدیریت سرمایه‌گذاری‌ها
+- **SharedExpensesModule**: مدیریت هزینه‌های مشترک
+- **RecurringTransactionsModule**: تراکنش‌های تکراری
+- **NotificationsModule**: سیستم اعلان‌ها
+- **RolesModule**: مدیریت نقش‌ها
+- **PermissionsModule**: مدیریت مجوزها
+
+## 🛠️ تکنولوژی‌های استفاده شده
+
+### Backend Framework
+- **NestJS**: فریم‌ورک Node.js برای ساخت اپلیکیشن‌های مقیاس‌پذیر
+- **TypeScript**: زبان برنامه‌نویسی با پشتیبانی از تایپ‌های قوی
+
+### Database & ORM
+- **TypeORM**: Object-Relational Mapping برای مدیریت پایگاه داده
+- **PostgreSQL**: پایگاه داده رابطه‌ای قدرتمند
+
+### Authentication & Security
+- **Passport.js**: استراتژی‌های احراز هویت
+- **JWT**: JSON Web Tokens برای احراز هویت
+- **bcrypt**: رمزنگاری امن رمزهای عبور
+
+### Validation & Documentation
+- **Zod**: اعتبارسنجی داده‌ها
+- **Swagger**: مستندسازی API
+- **class-validator**: اعتبارسنجی DTO ها
+
+### Internationalization
+- **nestjs-i18n**: پشتیبانی از زبان‌های مختلف (فارسی و انگلیسی)
+
+## 🚀 راه‌اندازی پروژه
+
+### پیش‌نیازها
+- **Node.js**: نسخه 18 یا بالاتر
+- **Bun**: برای مدیریت پکیج‌ها (اختیاری)
+- **PostgreSQL**: پایگاه داده
+- **Git**: کنترل نسخه
+
+### نصب و راه‌اندازی
+
+1. **کلون کردن پروژه**
 ```bash
-$ npm install
+git clone <repository-url>
+cd family-accounting/backend
 ```
 
-## Compile and run the project
-
+2. **نصب وابستگی‌ها**
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+bun install
+# یا
+npm install
 ```
 
-## Run tests
-
+3. **تنظیم متغیرهای محیطی**
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+# فایل .env را ایجاد کنید
+cp .env.example .env
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+4. **تنظیم پایگاه داده**
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+# تنظیمات PostgreSQL در فایل .env
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_USERNAME=your_username
+DATABASE_PASSWORD=your_password
+DATABASE_NAME=family_accounting
+PORT=4040
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+5. **اجرای پروژه**
+```bash
+# توسعه
+bun run start:dev
 
-## Resources
+# تولید
+bun run build
+bun run start:prod
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+## 📚 API Documentation
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+پس از راه‌اندازی پروژه، مستندات API در آدرس زیر قابل دسترسی است:
+```
+http://localhost:3000/api
+```
 
-## Support
+## 🧪 تست‌ها
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### اجرای تست‌ها
+```bash
+# تست‌های واحد
+bun run test
 
-## Stay in touch
+# تست‌های E2E
+bun run test:e2e
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# پوشش تست
+bun run test:cov
+```
 
-## License
+## 🔧 اسکریپت‌های مفید
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- **`bun run start:dev`**: اجرای پروژه در حالت توسعه
+- **`bun run build`**: ساخت پروژه
+- **`bun run lint`**: بررسی کد با ESLint
+- **`bun run format`**: فرمت‌بندی کد با Prettier
+
+## 🌐 پشتیبانی از زبان‌ها
+
+سیستم از دو زبان پشتیبانی می‌کند:
+- **فارسی (fa)**: زبان پیش‌فرض
+- **انگلیسی (en)**: زبان پشتیبان
+
+## 📱 ویژگی‌های امنیتی
+
+- **CORS**: تنظیمات امنیتی برای درخواست‌های cross-origin
+- **Rate Limiting**: محدودیت تعداد درخواست‌ها
+- **Input Validation**: اعتبارسنجی ورودی‌ها
+- **SQL Injection Protection**: محافظت در برابر حملات SQL
+
+## 🤝 مشارکت در پروژه
+
+1. پروژه را Fork کنید
+2. شاخه جدیدی برای ویژگی مورد نظر ایجاد کنید
+3. تغییرات را commit کنید
+4. Pull Request ارسال کنید
+
+## 📄 مجوز
+
+این پروژه تحت مجوز خصوصی توسعه یافته است.
+
+## 📞 پشتیبانی
+
+برای سوالات و مشکلات:
+- **ایمیل**: [your-email@example.com]
+- **GitHub Issues**: [repository-issues-url]
+
+---
+
+**توسعه‌دهنده**: [نام شما]
+**نسخه**: 0.0.1
+**آخرین بروزرسانی**: [تاریخ]
