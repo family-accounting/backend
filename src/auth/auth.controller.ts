@@ -1,27 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { loginAuthSchema, registerAuthSchema, type LoginAuthDto, type RegisterAuthDto } from './dto/auth.dto';
-import { ZodValidationPipe } from 'src/common/pipe/zod-validation.pipe';
-import * as bcrypt from 'bcrypt';
-import { ConfigService } from '@nestjs/config';
+import type { RegisterAuthDto, LoginAuthDto } from './dto/auth.dto';
+import { loginAuthSchema, registerAuthSchema } from './dto/auth.dto';
+import { ZodValidationPipe } from 'src/common/pipes/zod-validation.pipe';
 
 @Controller('auth')
 export class AuthController {
-  constructor(
-    private readonly authService: AuthService,
-    
-  ) { }
+  constructor(private readonly authService: AuthService) {}
+
+  @Post('register')
+  register(
+    @Body(new ZodValidationPipe(registerAuthSchema)) dto: RegisterAuthDto,
+  ) {
+    return this.authService.register(dto);
+  }
 
   @Post('login')
   login(@Body(new ZodValidationPipe(loginAuthSchema)) dto: LoginAuthDto) {
     return this.authService.login(dto);
   }
-
-
-  @Post('register')
-  async register(@Body(new ZodValidationPipe(registerAuthSchema)) dto: RegisterAuthDto) {
-    return this.authService.register(dto);
-  }
-
-
 }

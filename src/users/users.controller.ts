@@ -1,16 +1,26 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
-import { createUserSchema, paramSchema } from './dto/user.dto';
-import type { ParamUserDto, CreateUserDto, UpdateUserDto } from './dto/user.dto';
-import { ZodValidationPipe } from 'src/common/pipe/zod-validation.pipe';
+import type { CreateUserDto, ParamId, UpdateUserDto } from './dto/user.dto';
+import { ZodValidationPipe } from 'src/common/pipes/zod-validation.pipe';
+import { createUserSchema, paramIdSchema } from './dto/user.dto';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) { }
+  constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body(new ZodValidationPipe(createUserSchema)) dto: CreateUserDto) {
-    return this.usersService.create(dto);
+  create(
+    @Body(new ZodValidationPipe(createUserSchema)) createUserDto: CreateUserDto,
+  ) {
+    return this.usersService.create(createUserDto);
   }
 
   @Get()
@@ -19,17 +29,20 @@ export class UsersController {
   }
 
   @Get(':id')
-  findOneById(@Param(new ZodValidationPipe(paramSchema)) params: ParamUserDto) {
-    return this.usersService.findOneById(params.id);
+  findById(@Param(new ZodValidationPipe(paramIdSchema)) paramId: ParamId) {
+    return this.usersService.findById(paramId.id);
   }
 
   @Patch(':id')
-  updateOneById(@Param(new ZodValidationPipe(paramSchema)) params: ParamUserDto, @Body() dto: UpdateUserDto) {
-    return this.usersService.updateOneById(params.id, dto);
+  updateById(
+    @Param(new ZodValidationPipe(paramIdSchema)) paramId: ParamId,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
+    return this.usersService.updateById(paramId.id, updateUserDto);
   }
 
   @Delete(':id')
-  removeOneById(@Param(new ZodValidationPipe(paramSchema)) params: ParamUserDto) {
-    return this.usersService.removeOneById(params.id);
+  deleteById(@Param(new ZodValidationPipe(paramIdSchema)) paramId: ParamId) {
+    return this.usersService.deleteById(paramId.id);
   }
 }

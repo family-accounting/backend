@@ -1,49 +1,64 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { CreateUserDto, UpdateUserDto, UserDto } from './dto/user.dto';
+import { BadRequestException, Injectable } from '@nestjs/common';
+import type { CreateUserDto, UpdateUserDto } from './dto/user.dto';
 import { UserEntity } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import type { Id, Mobile } from 'src/common/types';
+import { BcryptService } from 'src/common/services/bcrypt.service';
+import { I18nService } from 'nestjs-i18n';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(UserEntity)
-    private readonly usersRepository: Repository<UserEntity>
-  ) { }
+    private readonly userRepository: Repository<UserEntity>,
+    private readonly bcryptService: BcryptService,
+    private readonly i18n: I18nService,
+  ) {}
 
   async create(dto: CreateUserDto) {
-    const exists = await this.usersRepository.existsBy({ mobile: dto.mobile });
-    if (exists) {
-      throw new BadRequestException('User mobile already exists');
+    const existMobile = await this.userRepository.existsBy({
+      mobile: dto.mobile,
+    });
+    if (existMobile) {
+      const message = this.i18n.t('errors.duplicate_mobile');
+      throw new BadRequestException(message);
     }
-
-    const user = this.usersRepository.create(dto);
-    return this.usersRepository.save(user);
+    const user = this.userRepository.create(dto);
+    const hashedPassword = this.bcryptService.hash(dto.password);
+    user.password = hashedPassword;
+    return this.userRepository.save(user);
   }
 
   async findAll() {
-    return await this.usersRepository.find();
+    return this.userRepository.find();
   }
 
-  async findOneById(id: UserDto['id']) {
-    const user = await this.usersRepository.findOneBy({ id });
-    if (!user) throw new NotFoundException('User not found');
+  async findById(id: Id) {
+    const user = await this.userRepository.findOneBy({ id });
+    if (!user) {
+      const message = this.i18n.t('errors.user_not_found');
+      throw new BadRequestException(message);
+    }
     return user;
   }
 
-  async findByMobile(mobile: string) {
-    return await this.usersRepository.findOneBy({ mobile });
+  async findByMobile(mobile: Mobile) {
+    const user = await this.userRepository.findOneBy({ mobile });
+    if (!user) {
+      const message = this.i18n.t('errors.user_not_found');
+      throw new BadRequestException(message);
+    }
+    return user;
   }
 
-  async updateOneById(id: UserDto['id'], dto: UpdateUserDto) {
-    const user = await this.usersRepository.findOneBy({ id });
-    if (!user) throw new NotFoundException('User not found');
-    return await this.usersRepository.update(id, dto);
+  async updateById(id: Id, dto: UpdateUserDto) {
+    await this.findById(id);
+    return this.userRepository.update(id, dto);
   }
 
-  async removeOneById(id: UserDto['id']) {
-    const user = await this.usersRepository.findOneBy({ id });
-    if (!user) throw new NotFoundException('User not found');
-    return await this.usersRepository.softDelete(id);
+  async deleteById(id: Id) {
+    await this.findById(id);
+    return this.userRepository.delete(id);
   }
 }

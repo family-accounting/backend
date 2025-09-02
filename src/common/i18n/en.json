@@ -1,0 +1,9 @@
+{
+  "errors": {
+    "duplicate_mobile": "Mobile number already exists",
+    "invalid_credentials": "Username or password is incorrect",
+    "invalid_mobile_or_password": "Invalid mobile number or password",
+    "mobile_already_exists": "Mobile number is already registered",
+    "user_not_found": "User not found"
+  }
+}

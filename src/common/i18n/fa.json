@@ -1,0 +1,9 @@
+{
+  "errors": {
+    "duplicate_mobile": "موبایل تکراری است",
+    "invalid_credentials": "نام کاربری یا رمز عبور اشتباه است",
+    "invalid_mobile_or_password": "شماره موبایل یا رمز عبور اشتباه است",
+    "mobile_already_exists": "شماره موبایل قبلا ثبت شده است",
+    "user_not_found": "کاربر یافت نشد"
+  }
+}
