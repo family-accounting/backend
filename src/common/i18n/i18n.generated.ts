@@ -4,10 +4,10 @@
 /* prettier-ignore */
 import { Path } from "nestjs-i18n";
 /* prettier-ignore */
-export type I18nTranslations = ListOfObject<{
+export type I18nTranslations = {
   errors: {
     duplicate_mobile: string;
   }
-}>
+}
 /* prettier-ignore */
 export type I18nPath = Path<I18nTranslations>;
