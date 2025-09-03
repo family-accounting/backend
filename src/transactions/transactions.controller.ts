@@ -1,0 +1,53 @@
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { TransactionsService } from './transactions.service';
+import { ZodValidationPipe } from 'src/common/pipes/zod-validation.pipe';
+import type {
+  ParamId,
+  CreateTransactionDto,
+  UpdateTransactionDto,
+} from './dto/transaction.dto';
+import { createTransactionSchema, paramIdSchema } from './dto/transaction.dto';
+
+@Controller('transactions')
+export class TransactionsController {
+  constructor(private readonly transactionsService: TransactionsService) {}
+
+  @Post()
+  create(
+    @Body(new ZodValidationPipe(createTransactionSchema))
+    dto: CreateTransactionDto,
+  ) {
+    return this.transactionsService.create(dto);
+  }
+
+  @Get()
+  findAll() {
+    return this.transactionsService.findAll();
+  }
+
+  @Get(':id')
+  findById(@Param(new ZodValidationPipe(paramIdSchema)) paramId: ParamId) {
+    return this.transactionsService.findById(paramId.id);
+  }
+
+  @Patch(':id')
+  updateById(
+    @Param(new ZodValidationPipe(paramIdSchema)) paramId: ParamId,
+    @Body() dto: UpdateTransactionDto,
+  ) {
+    return this.transactionsService.updateById(paramId.id, dto);
+  }
+
+  @Delete(':id')
+  deleteById(@Param(new ZodValidationPipe(paramIdSchema)) paramId: ParamId) {
+    return this.transactionsService.deleteById(paramId.id);
+  }
+}
