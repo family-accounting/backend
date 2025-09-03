@@ -1,19 +1,9 @@
 import { PipeTransform, BadRequestException } from '@nestjs/common';
-import { I18nService } from 'nestjs-i18n';
 import { z, ZodError } from 'zod';
 export class ZodValidationPipe implements PipeTransform {
-  constructor(
-    private schema: z.ZodSchema,
-    private readonly i18n: I18nService,
-  ) {
-    // Get current locale from i18n service
-    const currentLocale = this.i18n.getSupportedLanguages
-      ? this.i18n.getSupportedLanguages()[0]
-      : 'en';
-    z.config(z.locales[currentLocale] as Partial<z.core.$ZodConfig>);
-  }
-
+  constructor(private readonly schema: z.ZodSchema) {}
   async transform(value: unknown) {
+    z.config(z.locales['en'] as Partial<z.core.$ZodConfig>);
     try {
       return await this.schema.parseAsync(value);
     } catch (error) {
