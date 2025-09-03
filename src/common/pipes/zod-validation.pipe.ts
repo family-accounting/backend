@@ -1,9 +1,11 @@
 import { PipeTransform, BadRequestException } from '@nestjs/common';
 import { z, ZodError } from 'zod';
+const fa = z.locales.fa();
+z.config(fa);
+
 export class ZodValidationPipe implements PipeTransform {
   constructor(private readonly schema: z.ZodSchema) {}
   async transform(value: unknown) {
-    z.config(z.locales['en'] as Partial<z.core.$ZodConfig>);
     try {
       return await this.schema.parseAsync(value);
     } catch (error) {
