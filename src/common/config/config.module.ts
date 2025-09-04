@@ -31,9 +31,7 @@ import { JwtModule } from '@nestjs/jwt';
       useFactory: (configService: ConfigService) => ({
         secret: configService.get<string>('JWT_SECRET'),
         signOptions: {
-          expiresIn: configService.getOrThrow<number>(
-            'ACCESS_TOKEN_VALIDITY_DURATION_IN_SEC',
-          ),
+          expiresIn: configService.getOrThrow<number>('EXPIRES_IN'),
         },
       }),
       inject: [ConfigService],
@@ -43,7 +41,7 @@ import { JwtModule } from '@nestjs/jwt';
       imports: [NestConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        fallbackLanguage: configService.getOrThrow('FALLBACK_LANGUAGE'),
+        fallbackLanguage: configService.getOrThrow<string>('FALLBACK_LANGUAGE'),
         loaderOptions: {
           path: path.join(process.cwd(), 'src', 'common', 'i18n'),
           watch: true,
