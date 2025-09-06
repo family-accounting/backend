@@ -4,26 +4,35 @@ import {
   CreateTransactionDto,
   UpdateTransactionDto,
 } from './dto/transaction.dto';
+import { Repository } from 'typeorm';
+import { TransactionEntity } from './entities/transaction.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class TransactionsService {
+  constructor(
+    @InjectRepository(TransactionEntity)
+    private readonly transactionRepository: Repository<TransactionEntity>,
+  ) { }
+
   create(dto: CreateTransactionDto) {
-    return dto;
+    const transaction = this.transactionRepository.create(dto);
+    return this.transactionRepository.save(transaction);
   }
 
   findAll() {
-    return `This action returns all transactions`;
+    return this.transactionRepository.find();
   }
 
   findById(id: Id) {
-    return `This action returns a #${id} transaction`;
+    return this.transactionRepository.findOneBy({ id });
   }
 
   updateById(id: Id, dto: UpdateTransactionDto) {
-    return { id, dto };
+    return this.transactionRepository.update(id, dto);
   }
 
   deleteById(id: Id) {
-    return `This action removes a #${id} transaction`;
+    return this.transactionRepository.delete(id);
   }
 }
