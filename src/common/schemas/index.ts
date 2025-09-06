@@ -11,3 +11,4 @@ export const passwordSchema = z.string().min(8);
 export const passwordConfirmSchema = z.string().min(8);
 export const createdAtSchema = z.iso.date();
 export const updatedAtSchema = z.iso.date();
+export const transactionDateSchema = z.iso.date();

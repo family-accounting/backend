@@ -1,5 +1,5 @@
 import { TransactionTypeEnum } from 'src/common/enums';
-import type { CreatedAt, Id, UpdatedAt } from 'src/common/types';
+import type { CreatedAt, Id, TransactionDate, UpdatedAt } from 'src/common/types';
 import {
   Column,
   CreateDateColumn,
@@ -21,6 +21,9 @@ export class TransactionEntity {
 
   @Column({ type: 'enum', enum: TransactionTypeEnum })
   type: TransactionTypeEnum;
+
+  @UpdateDateColumn({ type: 'timestamp', nullable: false })
+  transactionDate: TransactionDate;
 
   @CreateDateColumn({ type: 'timestamp', nullable: false })
   createdAt: CreatedAt;
