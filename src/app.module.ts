@@ -5,9 +5,16 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from './common/config/config.module';
 import { TransactionsModule } from './transactions/transactions.module';
+import { GroupsModule } from './groups/groups.module';
 
 @Module({
-  imports: [ConfigModule, UsersModule, AuthModule, TransactionsModule],
+  imports: [
+    ConfigModule,
+    UsersModule,
+    AuthModule,
+    TransactionsModule,
+    GroupsModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
