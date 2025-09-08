@@ -34,20 +34,20 @@ export class TransactionsController {
   }
 
   @Get(':id')
-  findById(@Param(new ZodValidationPipe(paramIdSchema)) paramId: ParamId) {
-    return this.transactionsService.findById(paramId.id);
+  findById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
+    return this.transactionsService.findById(id);
   }
 
   @Patch(':id')
   updateById(
-    @Param(new ZodValidationPipe(paramIdSchema)) paramId: ParamId,
+    @Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId,
     @Body() dto: UpdateTransactionDto,
   ) {
-    return this.transactionsService.updateById(paramId.id, dto);
+    return this.transactionsService.updateById(id, dto);
   }
 
   @Delete(':id')
-  deleteById(@Param(new ZodValidationPipe(paramIdSchema)) paramId: ParamId) {
-    return this.transactionsService.deleteById(paramId.id);
+  deleteById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
+    return this.transactionsService.deleteById(id);
   }
 }

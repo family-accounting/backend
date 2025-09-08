@@ -29,20 +29,20 @@ export class UsersController {
   }
 
   @Get(':id')
-  findById(@Param(new ZodValidationPipe(paramIdSchema)) paramId: ParamId) {
-    return this.usersService.findById(paramId.id);
+  findById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
+    return this.usersService.findById(id);
   }
 
   @Patch(':id')
   updateById(
-    @Param(new ZodValidationPipe(paramIdSchema)) paramId: ParamId,
+    @Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId,
     @Body() updateUserDto: UpdateUserDto,
   ) {
-    return this.usersService.updateById(paramId.id, updateUserDto);
+    return this.usersService.updateById(id, updateUserDto);
   }
 
   @Delete(':id')
-  deleteById(@Param(new ZodValidationPipe(paramIdSchema)) paramId: ParamId) {
-    return this.usersService.deleteById(paramId.id);
+  deleteById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
+    return this.usersService.deleteById(id);
   }
 }
