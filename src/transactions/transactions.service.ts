@@ -13,7 +13,7 @@ export class TransactionsService {
   constructor(
     @InjectRepository(TransactionEntity)
     private readonly transactionRepository: Repository<TransactionEntity>,
-  ) { }
+  ) {}
 
   create(dto: CreateTransactionDto) {
     const transaction = this.transactionRepository.create(dto);
