@@ -1,18 +1,21 @@
 import { TransactionTypeEnum } from '@/common/enums';
 import type { CreatedAt, Id, TransactionDate, UpdatedAt } from '@/common/types';
+import { TagEntity } from '@/tags/entities/tag.entity';
 import { UserEntity } from '@/users/entities/user.entity';
 import {
+  BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity({ name: 'transactions' })
-export class TransactionEntity {
+export class TransactionEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: Id;
 
@@ -41,4 +44,8 @@ export class TransactionEntity {
   @ManyToOne(() => UserEntity, (user) => user.transactions)
   @JoinColumn({ name: 'user_id' })
   user: UserEntity;
+
+  // relation with tag
+  @ManyToMany(() => TagEntity, (tag) => tag.transaction)
+  tags: TagEntity[];
 }
