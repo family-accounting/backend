@@ -8,6 +8,11 @@ import { TransactionsModule } from './transactions/transactions.module';
 import { GroupsModule } from './groups/groups.module';
 import { ProfilesModule } from './profiles/profiles.module';
 import { WalletsModule } from './wallets/wallets.module';
+import { CategoriesModule } from './categories/categories.module';
+import { TagsModule } from './tags/tags.module';
+import { RolesModule } from './roles/roles.module';
+import { PermissionsModule } from './permissions/permissions.module';
+import { InvitationsModule } from './invitations/invitations.module';
 
 @Module({
   imports: [
@@ -18,6 +23,11 @@ import { WalletsModule } from './wallets/wallets.module';
     GroupsModule,
     ProfilesModule,
     WalletsModule,
+    CategoriesModule,
+    TagsModule,
+    RolesModule,
+    PermissionsModule,
+    InvitationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
