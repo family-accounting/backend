@@ -15,10 +15,10 @@ export class WalletEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: Id;
 
-  @Column({ type: 'varchar', length: 60, nullable: false })
+  @Column({ type: 'varchar', length: 255, nullable: false })
   name: string;
 
-  @Column({ type: 'varchar', length: 60, nullable: false })
+  @Column({ type: 'text', nullable: true })
   description: string;
 
   @CreateDateColumn({ type: 'timestamp', nullable: false })

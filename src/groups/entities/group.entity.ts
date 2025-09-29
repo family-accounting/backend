@@ -3,17 +3,23 @@ import { UserEntity } from '@/users/entities/user.entity';
 import {
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  JoinTable,
+  Column,
   ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity({ name: 'groups' })
 export class GroupEntity {
   @PrimaryGeneratedColumn('uuid')
   id: Id;
+
+  @Column({ type: 'varchar', length: 255, nullable: false })
+  name: string;
+  @Column({ type: 'text', nullable: true })
+  description: string;
 
   @CreateDateColumn({ type: 'timestamp', nullable: false })
   createdAt: CreatedAt;
@@ -24,4 +30,9 @@ export class GroupEntity {
   // relation with user
   @ManyToMany(() => UserEntity, (user) => user.groups)
   users: UserEntity[];
+
+  // relation with user
+  @ManyToOne(() => UserEntity, (user) => user.groups)
+  @JoinColumn({ name: 'owner_id' })
+  owner: UserEntity;
 }

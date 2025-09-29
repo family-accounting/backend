@@ -1,0 +1,163 @@
+erDiagram
+    %% PROFILES: User information
+    PROFILES {
+        uuid id PK
+        text first_name
+        text last_name
+        text avatar_url
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    %% GROUPS: Group of users, owner_id non-nullable
+    GROUPS {
+        uuid id PK
+        uuid owner_id FK
+        text name
+        text description
+        text color
+        text icon
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    %% USER_GROUP: Junction table for many-to-many between PROFILES and GROUPS
+    USER_GROUP {
+        uuid user_id FK
+        uuid group_id FK
+        timestamp created_at
+    }
+
+    %% INVITATION: Invitations to join groups
+    INVITATION {
+        uuid id PK
+        uuid group_id FK
+        text email
+        varchar status
+        %% Possible values: pending, accepted, declined
+        timestamp sent_at
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    %% WALLETS: Financial wallets, group_id nullable
+    WALLETS {
+        uuid id PK
+        uuid user_id FK
+        uuid group_id FK
+        %% Note: group_id is nullable
+        text name
+        text description
+        text color
+        text icon
+        varchar currency
+        %% Possible values: USD, EUR, IRR
+        decimal balance
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    %% CATEGORIES: Transaction categories, tied to group and transaction type
+    CATEGORIES {
+        uuid id PK
+        uuid group_id FK
+        text name
+        text description
+        text color
+        text icon
+        varchar type
+        %% Possible values: income, expense, transfer
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    %% TAGS: Transaction tags, tied to group
+    TAGS {
+        uuid id PK
+        uuid group_id FK
+        text name
+        text description
+        text color
+        text icon
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    %% TRANSACTIONS: Financial transactions, to_wallet_id nullable
+    TRANSACTIONS {
+        uuid id PK
+        decimal amount
+        varchar type
+        %% Possible values: income, expense, transfer
+        uuid from_wallet_id FK
+        uuid to_wallet_id FK
+        %% Note: to_wallet_id is nullable
+        uuid group_id FK
+        uuid category_id FK
+        text description
+        text name
+        text color
+        text icon
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    %% TRANSACTION_TAG: Junction table for many-to-many between TRANSACTIONS and TAGS
+    TRANSACTION_TAG {
+        uuid transaction_id FK
+        uuid tag_id FK
+        timestamp created_at
+    }
+
+    %% ROLES: User roles for permissions
+    ROLES {
+        uuid id PK
+        text name
+        text description
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    %% PERMISSIONS: Permissions for roles
+    PERMISSIONS {
+        uuid id PK
+        text name
+        text description
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    %% ROLE_PERMISSION: Junction table for many-to-many between ROLES and PERMISSIONS
+    ROLE_PERMISSION {
+        uuid role_id FK
+        uuid permission_id FK
+        timestamp created_at
+    }
+
+    %% USER_ROLE: Junction table for role assignments in groups
+    USER_ROLE {
+        uuid user_id FK
+        uuid role_id FK
+        uuid group_id FK
+        timestamp created_at
+    }
+
+    %% Relationships
+    PROFILES ||--o{ WALLETS : "owns"
+    PROFILES ||--o{ USER_GROUP : "member of"
+    PROFILES ||--o{ USER_ROLE : "assigned"
+
+    GROUPS ||--o{ USER_GROUP : "includes"
+    GROUPS ||--o{ INVITATION : "sends"
+    GROUPS ||--o{ CATEGORIES : "defines"
+    GROUPS ||--o{ TAGS : "defines"
+    GROUPS ||--o{ TRANSACTIONS : "logs"
+    GROUPS ||--o{ WALLETS : "contains"
+
+    CATEGORIES ||--o{ TRANSACTIONS : "categorized"
+    TAGS ||--o{ TRANSACTION_TAG : "assigned"
+    TRANSACTIONS ||--o{ TRANSACTION_TAG : "tagged"
+
+    ROLES ||--o{ USER_ROLE : "applied"
+    ROLES ||--o{ ROLE_PERMISSION : "granted"
+    PERMISSIONS ||--o{ ROLE_PERMISSION : "granted" 

@@ -28,7 +28,7 @@ export class TransactionEntity {
   @Column({ type: 'float', nullable: false, default: 0 })
   amount: number;
 
-  @UpdateDateColumn({ type: 'timestamp', nullable: false })
+  @Column({ type: 'timestamp', nullable: false })
   transactionDate: TransactionDate;
 
   @CreateDateColumn({ type: 'timestamp', nullable: false })
