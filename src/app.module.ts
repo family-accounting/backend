@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from './common/config/config.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { GroupsModule } from './groups/groups.module';
+import { ProfilesModule } from './profiles/profiles.module';
 
 @Module({
   imports: [
@@ -14,6 +15,8 @@ import { GroupsModule } from './groups/groups.module';
     AuthModule,
     TransactionsModule,
     GroupsModule,
+    ProfilesModule,
+    
   ],
   controllers: [AppController],
   providers: [AppService],

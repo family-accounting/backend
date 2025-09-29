@@ -22,7 +22,7 @@ export class AuthService {
     const token = await this.jwtService.signAsync({
       id: user,
       mobile: user.mobile,
-      role: user.role,
+      // role: user.role,
     });
     const obj = pick<UserEntity>(user, ['id', 'mobile', 'role']);
     return { ...obj, token };
@@ -33,7 +33,7 @@ export class AuthService {
     const token = await this.jwtService.signAsync({
       id: user,
       mobile: user.mobile,
-      role: user.role,
+      // role: user.role,
     });
     const obj = pick<UserEntity>(user, ['id', 'mobile', 'role']);
     return { ...obj, token };

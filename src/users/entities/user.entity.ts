@@ -3,6 +3,11 @@ import {
   CreateDateColumn,
   Entity,
   Index,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -11,12 +16,12 @@ import type {
   Id,
   Mobile,
   Password,
-  Role,
-  Status,
   UpdatedAt,
 } from '@/common/types';
-import { RoleEnum, StatusEnum } from '@/common/enums';
 import { BaseEntity } from 'typeorm/repository/BaseEntity';
+import { GroupEntity } from '@/groups/entities/group.entity';
+import { ProfileEntity } from '@/profiles/entities/profile.entity';
+import { TransactionEntity } from '@/transactions/entities/transaction.entity';
 
 @Entity({ name: 'users' })
 export class UserEntity extends BaseEntity {
@@ -30,15 +35,25 @@ export class UserEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 60, nullable: false })
   password: Password;
 
-  @Column({ type: 'enum', enum: RoleEnum, default: RoleEnum.USER })
-  role: Role;
-
-  @Column({ type: 'enum', enum: StatusEnum, default: StatusEnum.ACTIVE })
-  status: Status;
-
   @CreateDateColumn({ type: 'timestamp', nullable: false })
   createdAt: CreatedAt;
 
   @UpdateDateColumn({ type: 'timestamp', nullable: false })
   updatedAt: UpdatedAt;
+
+
+  // relation with profile
+  @OneToOne(() => ProfileEntity, (profile) => profile.user)
+  @JoinColumn({ name: 'profile_id' })
+  profile: ProfileEntity;
+
+  // relation with transaction
+  @OneToMany(() => TransactionEntity, (transaction) => transaction.user)
+  @JoinColumn({ name: 'transaction_id' })
+  transactions: TransactionEntity[];
+
+  // relation with group
+  @ManyToMany(() => GroupEntity, (group) => group.users)
+  groups: GroupEntity[];
+
 }

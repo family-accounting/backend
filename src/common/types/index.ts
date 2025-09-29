@@ -10,6 +10,7 @@ import type {
   updatedAtSchema,
   createdAtSchema,
   transactionDateSchema,
+  emailSchema,
 } from '../schemas/index';
 
 export type Token = z.infer<typeof tokenSchema>;
@@ -22,6 +23,7 @@ export type Status = z.infer<typeof statusSchema>;
 export type CreatedAt = z.infer<typeof createdAtSchema>;
 export type UpdatedAt = z.infer<typeof updatedAtSchema>;
 export type TransactionDate = z.infer<typeof transactionDateSchema>;
+export type Email = z.infer<typeof emailSchema>;
 
 export type AccessTokenPayload = {
   id: string;
