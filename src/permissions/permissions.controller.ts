@@ -8,8 +8,10 @@ import {
   Delete,
 } from '@nestjs/common';
 import { PermissionsService } from './permissions.service';
-import { CreatePermissionDto } from './dto/create-permission.dto';
-import { UpdatePermissionDto } from './dto/update-permission.dto';
+import type {
+  CreatePermissionDto,
+  UpdatePermissionDto,
+} from './dto/permission.dto';
 
 @Controller('permissions')
 export class PermissionsController {
