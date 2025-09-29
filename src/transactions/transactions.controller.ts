@@ -13,7 +13,7 @@ import type {
   ParamId,
   CreateTransactionDto,
   UpdateTransactionDto,
-  } from './dto/transaction.dto';
+} from './dto/transaction.dto';
 import { createTransactionSchema, paramIdSchema } from './dto/transaction.dto';
 
 @Controller('transactions')

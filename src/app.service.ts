@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import type{ ResponseSuccess } from '@/interfaces/response';
+import type { ResponseSuccess } from '@/interfaces/response';
 
 @Injectable()
 export class AppService {

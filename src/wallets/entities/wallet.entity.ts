@@ -1,19 +1,25 @@
 import type { CreatedAt, Id, UpdatedAt } from '@/common/types';
 import { UserEntity } from '@/users/entities/user.entity';
 import {
+  BaseEntity,
+  Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  JoinTable,
-  ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ name: 'groups' })
-export class GroupEntity {
+@Entity({ name: 'wallets' })
+export class WalletEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: Id;
+
+  @Column({ type: 'varchar', length: 60, nullable: false })
+  name: string;
+
+  @Column({ type: 'varchar', length: 60, nullable: false })
+  description: string;
 
   @CreateDateColumn({ type: 'timestamp', nullable: false })
   createdAt: CreatedAt;
@@ -22,6 +28,6 @@ export class GroupEntity {
   updatedAt: UpdatedAt;
 
   // relation with user
-  @ManyToMany(() => UserEntity, (user) => user.groups)
-  users: UserEntity[];
+  @ManyToOne(() => UserEntity, (user) => user.wallets)
+  user: UserEntity;
 }

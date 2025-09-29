@@ -1,10 +1,5 @@
 import { TransactionTypeEnum } from '@/common/enums';
-import type {
-  CreatedAt,
-  Id,
-  TransactionDate,
-  UpdatedAt,
-} from '@/common/types';
+import type { CreatedAt, Id, TransactionDate, UpdatedAt } from '@/common/types';
 import { UserEntity } from '@/users/entities/user.entity';
 import {
   Column,
@@ -30,7 +25,7 @@ export class TransactionEntity {
   @Column({ type: 'enum', enum: TransactionTypeEnum })
   type: TransactionTypeEnum;
 
-  @Column({ type: 'float', nullable: false , default: 0})
+  @Column({ type: 'float', nullable: false, default: 0 })
   amount: number;
 
   @UpdateDateColumn({ type: 'timestamp', nullable: false })

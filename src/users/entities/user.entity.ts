@@ -22,6 +22,7 @@ import { BaseEntity } from 'typeorm/repository/BaseEntity';
 import { GroupEntity } from '@/groups/entities/group.entity';
 import { ProfileEntity } from '@/profiles/entities/profile.entity';
 import { TransactionEntity } from '@/transactions/entities/transaction.entity';
+import { WalletEntity } from '@/wallets/entities/wallet.entity';
 
 @Entity({ name: 'users' })
 export class UserEntity extends BaseEntity {
@@ -41,7 +42,6 @@ export class UserEntity extends BaseEntity {
   @UpdateDateColumn({ type: 'timestamp', nullable: false })
   updatedAt: UpdatedAt;
 
-
   // relation with profile
   @OneToOne(() => ProfileEntity, (profile) => profile.user)
   @JoinColumn({ name: 'profile_id' })
@@ -56,4 +56,8 @@ export class UserEntity extends BaseEntity {
   @ManyToMany(() => GroupEntity, (group) => group.users)
   groups: GroupEntity[];
 
+  // relation with wallet
+  @OneToMany(() => WalletEntity, (wallet) => wallet.user)
+  @JoinColumn({ name: 'wallet_id' })
+  wallets: WalletEntity[];
 }
