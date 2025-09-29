@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { CreateInvitationDto } from './dto/create-invitation.dto';
-import { UpdateInvitationDto } from './dto/update-invitation.dto';
+import type {
+  CreateInvitationDto,
+  UpdateInvitationDto,
+} from './dto/invitation.dto';
 
 @Injectable()
 export class InvitationsService {

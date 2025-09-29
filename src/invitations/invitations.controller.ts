@@ -8,8 +8,10 @@ import {
   Delete,
 } from '@nestjs/common';
 import { InvitationsService } from './invitations.service';
-import { CreateInvitationDto } from './dto/create-invitation.dto';
-import { UpdateInvitationDto } from './dto/update-invitation.dto';
+import type {
+  CreateInvitationDto,
+  UpdateInvitationDto,
+} from './dto/invitation.dto';
 
 @Controller('invitations')
 export class InvitationsController {
