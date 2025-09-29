@@ -6,6 +6,7 @@ import { ProfileEntity } from '@/profiles/entities/profile.entity';
 import { GroupEntity } from '@/groups/entities/group.entity';
 import { WalletEntity } from '@/wallets/entities/wallet.entity';
 import { CategoryEntity } from '@/categories/entities/category.entity';
+import { TagEntity } from '@/tags/entities/tag.entity';
 
 export const getOrmConfig = (
   configService: ConfigService,
@@ -23,6 +24,7 @@ export const getOrmConfig = (
     GroupEntity,
     WalletEntity,
     CategoryEntity,
+    TagEntity
   ],
   synchronize: configService.get<boolean>('DB_SYNC'),
   logging: configService.get<boolean>('DB_LOGGING'),
