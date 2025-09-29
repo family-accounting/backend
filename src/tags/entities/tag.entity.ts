@@ -16,8 +16,14 @@ export class TagEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: Id;
 
-  @Column({ type: 'varchar', length: 255, nullable: false })
+  @Column({ type: 'varchar', length: 255, nullable: false, unique: true })
   name: string;
+
+  @Column({ type: 'text', nullable: true })
+  description: string;
+
+  @Column({ type: 'varchar', length: 255, nullable: false })
+  color: string;
 
   @CreateDateColumn({ type: 'timestamp', nullable: false })
   createdAt: CreatedAt;
