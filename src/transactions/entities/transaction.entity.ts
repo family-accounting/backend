@@ -1,10 +1,10 @@
-import { TransactionTypeEnum } from 'src/common/enums';
+import { TransactionTypeEnum } from '@/common/enums';
 import type {
   CreatedAt,
   Id,
   TransactionDate,
   UpdatedAt,
-} from 'src/common/types';
+} from '@/common/types';
 import {
   Column,
   CreateDateColumn,

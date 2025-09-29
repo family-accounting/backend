@@ -8,12 +8,12 @@ import {
   Delete,
 } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
-import { ZodValidationPipe } from 'src/common/pipes/zod-validation.pipe';
+import { ZodValidationPipe } from '@/common/pipes/zod-validation.pipe';
 import type {
   ParamId,
   CreateTransactionDto,
   UpdateTransactionDto,
-} from './dto/transaction.dto';
+  } from './dto/transaction.dto';
 import { createTransactionSchema, paramIdSchema } from './dto/transaction.dto';
 
 @Controller('transactions')

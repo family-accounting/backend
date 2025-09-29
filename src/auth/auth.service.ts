@@ -1,11 +1,11 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import type { LoginAuthDto, RegisterAuthDto } from './dto/auth.dto';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '@/users/users.service';
 import { JwtService } from '@nestjs/jwt';
-import { Mobile, Password } from 'src/common/types';
-import { BcryptService } from 'src/common/services/bcrypt.service';
+import { Mobile, Password } from '@/common/types';
+import { BcryptService } from '@/common/services/bcrypt.service';
 import { pick } from 'lodash';
-import { UserEntity } from 'src/users/entities/user.entity';
+import { UserEntity } from '@/users/entities/user.entity';
 import { I18nService } from 'nestjs-i18n';
 
 @Injectable()

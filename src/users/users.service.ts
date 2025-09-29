@@ -3,8 +3,8 @@ import type { CreateUserDto, UpdateUserDto } from './dto/user.dto';
 import { UserEntity } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import type { Id, Mobile } from 'src/common/types';
-import { BcryptService } from 'src/common/services/bcrypt.service';
+import type { Id, Mobile } from '@/common/types';
+import { BcryptService } from '@/common/services/bcrypt.service';
 import { I18nService } from 'nestjs-i18n';
 
 @Injectable()

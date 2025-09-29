@@ -14,8 +14,8 @@ import type {
   Role,
   Status,
   UpdatedAt,
-} from 'src/common/types';
-import { RoleEnum, StatusEnum } from 'src/common/enums';
+} from '@/common/types';
+import { RoleEnum, StatusEnum } from '@/common/enums';
 import { BaseEntity } from 'typeorm/repository/BaseEntity';
 
 @Entity({ name: 'users' })

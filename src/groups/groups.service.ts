@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateGroupDto } from './dto/group.dto';
-import { Id } from '../common/types';
+import { Id } from '@/common/types';
 import { Repository } from 'typeorm';
 import { GroupEntity } from './entities/group.entity';
 import { InjectRepository } from '@nestjs/typeorm';

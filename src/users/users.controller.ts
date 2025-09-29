@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import type { CreateUserDto, ParamId, UpdateUserDto } from './dto/user.dto';
-import { ZodValidationPipe } from 'src/common/pipes/zod-validation.pipe';
+import { ZodValidationPipe } from '@/common/pipes/zod-validation.pipe';
 import { createUserSchema, paramIdSchema } from './dto/user.dto';
 
 @Controller('users')

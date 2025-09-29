@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import type{ ResponseSuccess } from './interfaces/response';
 
 describe('AppController', () => {
   let appController: AppController;
@@ -15,8 +16,8 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+    it('isConnected', () => {
+      expect(appController.isConnected()).toStrictEqual({message: 'You are connected!', status: 'OK', stauesCode: 200} as ResponseSuccess);
     });
   });
 });

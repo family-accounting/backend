@@ -1,5 +1,5 @@
 import type { z } from 'zod';
-import { createUserSchema } from '../../users/dto/user.dto';
+import { createUserSchema } from '@/users/dto/user.dto';
 
 export const registerAuthSchema = createUserSchema.strict();
 

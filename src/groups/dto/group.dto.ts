@@ -7,7 +7,7 @@ import {
   passwordConfirmSchema,
   roleSchema,
   statusSchema,
-} from '../../common/schemas';
+} from '@/common/schemas';
 
 export class CreateGroupDto {}
 export const paramIdSchema = z.object({

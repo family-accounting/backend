@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { IdSchema } from '../../common/schemas';
-import { TransactionTypeEnum } from 'src/common/enums';
+import { IdSchema } from '@/common/schemas';
+import { TransactionTypeEnum } from '@/common/enums';
 
 export const paramIdSchema = z.object({
   id: IdSchema,
