@@ -8,8 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ProfilesService } from './profiles.service';
-import { CreateProfileDto } from './dto/create-profile.dto';
-import { UpdateProfileDto } from './dto/update-profile.dto';
+import type { CreateProfileDto, UpdateProfileDto } from './dto/profile.dto';
 
 @Controller('profiles')
 export class ProfilesController {
