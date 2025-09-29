@@ -9,15 +9,17 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  BaseEntity,
 } from 'typeorm';
 
 @Entity({ name: 'groups' })
-export class GroupEntity {
+export class GroupEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: Id;
 
   @Column({ type: 'varchar', length: 255, nullable: false })
   name: string;
+
   @Column({ type: 'text', nullable: true })
   description: string;
 
