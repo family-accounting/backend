@@ -46,6 +46,6 @@ export class TransactionEntity extends BaseEntity {
   user: UserEntity;
 
   // relation with tag
-  @ManyToMany(() => TagEntity, (tag) => tag.transaction)
+  @ManyToMany(() => TagEntity, (tag) => tag.transactions)
   tags: TagEntity[];
 }
