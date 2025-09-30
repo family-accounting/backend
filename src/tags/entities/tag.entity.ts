@@ -9,6 +9,7 @@ import {
   ManyToOne,
   JoinColumn,
   Entity,
+  ManyToMany,
 } from 'typeorm';
 
 @Entity({ name: 'tags' })
@@ -32,7 +33,6 @@ export class TagEntity extends BaseEntity {
   updatedAt: UpdatedAt;
 
   // relation with transaction
-  @ManyToOne(() => TransactionEntity, (transaction) => transaction.tags)
-  @JoinColumn({ name: 'transaction_id' })
-  transaction: TransactionEntity;
+  @ManyToMany(() => TransactionEntity, (transaction) => transaction.tags)
+  transactions: TransactionEntity[];
 }
