@@ -7,7 +7,7 @@ export class RoleEntity extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
     id: Id;
 
-    @Column({ type: 'varchar', length: 255, nullable: false })
+    @Column({ type: 'varchar', length: 255, nullable: false, unique: true })
     name: string;
 
     @Column({ type: 'text', nullable: true })
@@ -22,4 +22,6 @@ export class RoleEntity extends BaseEntity {
     // relation with permission
     @ManyToMany(() => PermissionEntity, (permission) => permission.roles)
     permissions: PermissionEntity[];
+
+    
 }
