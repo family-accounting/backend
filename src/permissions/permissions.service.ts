@@ -1,28 +1,47 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import type {
   CreatePermissionDto,
   UpdatePermissionDto,
 } from './dto/permission.dto';
+import { PermissionEntity } from './entities/permission.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import type{ Id } from '@/common/types';
+import { I18nService } from 'nestjs-i18n';
 
 @Injectable()
 export class PermissionsService {
-  create(createPermissionDto: CreatePermissionDto) {
-    return 'This action adds a new permission';
+  constructor(
+    @InjectRepository(PermissionEntity)
+    private readonly permissionRepository: Repository<PermissionEntity>,
+    private readonly i18n: I18nService,
+  ) {}
+
+  async create(createPermissionDto: CreatePermissionDto) {
+    const existPermission = await this.permissionRepository.findOneBy({
+      name: createPermissionDto.name,
+    });
+    if (existPermission) {
+      const message = this.i18n.t('errors.duplicate_permission');
+      throw new BadRequestException(message);
+    }
+    const permission = this.permissionRepository.create(createPermissionDto);
+    return this.permissionRepository.save(permission);
   }
 
   findAll() {
-    return `This action returns all permissions`;
+    return this.permissionRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} permission`;
+  findOne(id: Id) {
+    return this.permissionRepository.findOneBy({ id });
   }
 
-  update(id: number, updatePermissionDto: UpdatePermissionDto) {
-    return `This action updates a #${id} permission`;
+  update(id: Id, updatePermissionDto: UpdatePermissionDto) {
+    return this.permissionRepository.update(id, updatePermissionDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} permission`;
+  remove(id: Id) {
+    return this.permissionRepository.delete(id);
   }
 }

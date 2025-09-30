@@ -10,15 +10,22 @@ import {
 import { PermissionsService } from './permissions.service';
 import type {
   CreatePermissionDto,
+  ParamId,
   UpdatePermissionDto,
 } from './dto/permission.dto';
+import {
+  paramIdSchema,
+  createPermissionSchema,
+  updatePermissionSchema,
+} from './dto/permission.dto';
+import { ZodValidationPipe } from '@/common/pipes/zod-validation.pipe';
 
 @Controller('permissions')
 export class PermissionsController {
-  constructor(private readonly permissionsService: PermissionsService) {}
+  constructor(private readonly permissionsService: PermissionsService) { }
 
   @Post()
-  create(@Body() createPermissionDto: CreatePermissionDto) {
+  create(@Body(new ZodValidationPipe(createPermissionSchema)) createPermissionDto: CreatePermissionDto) {
     return this.permissionsService.create(createPermissionDto);
   }
 
@@ -28,20 +35,20 @@ export class PermissionsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.permissionsService.findOne(+id);
+  findOne(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
+    return this.permissionsService.findOne(id);
   }
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
-    @Body() updatePermissionDto: UpdatePermissionDto,
+    @Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId,
+    @Body(new ZodValidationPipe(updatePermissionSchema)) updatePermissionDto: UpdatePermissionDto,
   ) {
-    return this.permissionsService.update(+id, updatePermissionDto);
+    return this.permissionsService.update(id, updatePermissionDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.permissionsService.remove(+id);
+  remove(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
+    return this.permissionsService.remove(id);
   }
 }
