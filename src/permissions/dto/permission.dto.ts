@@ -1,12 +1,6 @@
 import { z } from 'zod';
 import {
-  mobileSchema,
   IdSchema,
-  usernameSchema,
-  passwordSchema,
-  passwordConfirmSchema,
-  roleSchema,
-  statusSchema,
 } from '@/common/schemas';
 
 export const paramIdSchema = z.object({
@@ -32,15 +26,3 @@ export type CreatePermissionDto = z.infer<typeof createPermissionSchema>;
 export type UpdatePermissionDto = z.infer<typeof updatePermissionSchema>;
 export type ParamId = z.infer<typeof paramIdSchema>;
 export type ParamName = z.infer<typeof paramNameSchema>;
-
-
-// export class CreatePermissionDto {
-//     @IsString()
-//     @IsNotEmpty()
-//     name: string;
-
-//     @IsString()
-//     @IsOptional()
-//     description: string;
-// }
-// export class UpdatePermissionDto extends PartialType(CreatePermissionDto) {}
