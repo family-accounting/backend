@@ -17,7 +17,7 @@ export class PermissionsService {
     private readonly i18n: I18nService,
   ) {}
 
-  async create(createPermissionDto: CreatePermissionDto) {
+  async createOne(createPermissionDto: CreatePermissionDto) {
     const existPermission = await this.permissionRepository.findOneBy({
       name: createPermissionDto.name,
     });
@@ -33,15 +33,25 @@ export class PermissionsService {
     return this.permissionRepository.find();
   }
 
-  findOne(id: Id) {
+  findOneById(id: Id) {
     return this.permissionRepository.findOneBy({ id });
   }
 
-  update(id: Id, updatePermissionDto: UpdatePermissionDto) {
-    return this.permissionRepository.update(id, updatePermissionDto);
+  async updateOneById(id: Id, updatePermissionDto: UpdatePermissionDto) {
+    const permission = await this.permissionRepository.update(id, updatePermissionDto);
+    if (permission.affected === 0) {
+      const message = this.i18n.t('errors.permission_not_found');
+      throw new BadRequestException(message);
+    }
+    return permission.affected === 1 ? true : false;
   }
 
-  remove(id: Id) {
-    return this.permissionRepository.delete(id);
+  async deleteOneById(id: Id) {
+    const permission = await this.permissionRepository.delete(id);
+    if (permission.affected === 0) {
+      const message = this.i18n.t('errors.permission_not_found');
+      throw new BadRequestException(message);
+    }
+    return permission.affected === 1 ? true : false;
   }
 }

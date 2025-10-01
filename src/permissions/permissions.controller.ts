@@ -25,8 +25,8 @@ export class PermissionsController {
   constructor(private readonly permissionsService: PermissionsService) { }
 
   @Post()
-  create(@Body(new ZodValidationPipe(createPermissionSchema)) createPermissionDto: CreatePermissionDto) {
-    return this.permissionsService.create(createPermissionDto);
+  createOne(@Body(new ZodValidationPipe(createPermissionSchema)) createPermissionDto: CreatePermissionDto) {
+    return this.permissionsService.createOne(createPermissionDto);
   }
 
   @Get()
@@ -35,20 +35,20 @@ export class PermissionsController {
   }
 
   @Get(':id')
-  findOne(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
-    return this.permissionsService.findOne(id);
+  findOneById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
+    return this.permissionsService.findOneById(id);
   }
 
   @Patch(':id')
-  update(
+  updateOneById(
     @Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId,
     @Body(new ZodValidationPipe(updatePermissionSchema)) updatePermissionDto: UpdatePermissionDto,
   ) {
-    return this.permissionsService.update(id, updatePermissionDto);
+    return this.permissionsService.updateOneById(id, updatePermissionDto);
   }
 
   @Delete(':id')
-  remove(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
-    return this.permissionsService.remove(id);
+  deleteOneById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
+    return this.permissionsService.deleteOneById(id);
   }
 }
