@@ -18,8 +18,8 @@ export class RolesController {
   constructor(private readonly rolesService: RolesService) { }
 
   @Post()
-  create(@Body(new ZodValidationPipe(createRoleSchema)) createRoleDto: CreateRoleDto) {
-    return this.rolesService.create(createRoleDto);
+  createOne(@Body(new ZodValidationPipe(createRoleSchema)) createRoleDto: CreateRoleDto) {
+    return this.rolesService.createOne(createRoleDto);
   }
 
   @Get()
@@ -28,17 +28,19 @@ export class RolesController {
   }
 
   @Get(':id')
-  findOne(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
-    return this.rolesService.findOne(id);
+  findOneById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
+    return this.rolesService.findOneById(id);
   }
 
   @Patch(':id')
-  update(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId, @Body(new ZodValidationPipe(updateRoleSchema)) updateRoleDto: UpdateRoleDto) {
-    return this.rolesService.update(id, updateRoleDto);
+  updateOneById(
+    @Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId,
+    @Body(new ZodValidationPipe(updateRoleSchema)) updateRoleDto: UpdateRoleDto) {
+    return this.rolesService.updateOneById(id, updateRoleDto);
   }
 
   @Delete(':id')
-  remove(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
-    return this.rolesService.remove(id);
+  deleteOneById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
+    return this.rolesService.deleteOneById(id);
   }
 }

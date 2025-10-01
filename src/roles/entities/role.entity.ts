@@ -1,6 +1,7 @@
 import type { CreatedAt, Id, UpdatedAt } from "@/common/types";
 import { PermissionEntity } from "@/permissions/entities/permission.entity";
 import { BaseEntity, Column, CreateDateColumn, Entity, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { GroupEntity } from "@/groups/entities/group.entity";
 
 @Entity({ name: 'roles' })
 export class RoleEntity extends BaseEntity {
@@ -22,6 +23,10 @@ export class RoleEntity extends BaseEntity {
     // relation with permission
     @ManyToMany(() => PermissionEntity, (permission) => permission.roles)
     permissions: PermissionEntity[];
+
+    // relation with group
+    @ManyToMany(() => GroupEntity, (group) => group.roles)
+    groups: GroupEntity[];
 
     
 }

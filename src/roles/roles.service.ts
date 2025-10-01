@@ -15,7 +15,7 @@ export class RolesService {
     private readonly i18n: I18nService,
   ) {}
 
-  async create(createRoleDto: CreateRoleDto) {
+  async createOne(createRoleDto: CreateRoleDto) {
     const existRole = await this.roleRepository.findOneBy({name:createRoleDto.name})
     if(existRole){
       const message = this.i18n.t('errors.duplicate_role')
@@ -30,15 +30,15 @@ export class RolesService {
     return this.roleRepository.find()
   }
 
-  findOne(id: Id) {
+  findOneById(id: Id) {
     return this.roleRepository.findOneBy({id});
   }
 
-  update(id: Id, updateRoleDto: UpdateRoleDto) {
+  updateOneById(id: Id, updateRoleDto: UpdateRoleDto) {
     return this.roleRepository.update(id,updateRoleDto);
   }
 
-  remove(id: Id) {
+  deleteOneById(id: Id) {
     return this.roleRepository.delete(id);
   }
 }
