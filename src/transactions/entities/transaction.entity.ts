@@ -1,5 +1,6 @@
 import { TransactionTypeEnum } from '@/common/enums';
 import type { CreatedAt, Id, TransactionDate, UpdatedAt } from '@/common/types';
+import { GroupEntity } from '@/groups/entities/group.entity';
 import { TagEntity } from '@/tags/entities/tag.entity';
 import { UserEntity } from '@/users/entities/user.entity';
 import {
@@ -48,4 +49,8 @@ export class TransactionEntity extends BaseEntity {
   // relation with tag
   @ManyToMany(() => TagEntity, (tag) => tag.transactions)
   tags: TagEntity[];
+
+  // relation with group
+  @ManyToOne(() => GroupEntity, (group) => group.transactions)
+  group: GroupEntity;
 }
