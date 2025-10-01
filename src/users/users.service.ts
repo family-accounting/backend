@@ -16,7 +16,7 @@ export class UsersService {
     private readonly i18n: I18nService,
   ) {}
 
-  async create(dto: CreateUserDto) {
+  async createOne(dto: CreateUserDto) {
     const existMobile = await this.userRepository.existsBy({
       mobile: dto.mobile,
     });
@@ -34,7 +34,7 @@ export class UsersService {
     return this.userRepository.find();
   }
 
-  async findById(id: Id) {
+  async findOneById(id: Id) {
     const user = await this.userRepository.findOneBy({ id });
     if (!user) {
       const message = this.i18n.t('errors.user_not_found');
@@ -52,13 +52,13 @@ export class UsersService {
     return user;
   }
 
-  async updateById(id: Id, dto: UpdateUserDto) {
-    await this.findById(id);
+  async updateOneById(id: Id, dto: UpdateUserDto) {
+    await this.findOneById(id);
     return this.userRepository.update(id, dto);
   }
 
-  async deleteById(id: Id) {
-    await this.findById(id);
+  async deleteOneById(id: Id) {
+    await this.findOneById(id);
     return this.userRepository.delete(id);
   }
 }

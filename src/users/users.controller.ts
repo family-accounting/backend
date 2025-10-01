@@ -17,10 +17,10 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(
+  createOne(
     @Body(new ZodValidationPipe(createUserSchema)) createUserDto: CreateUserDto,
   ) {
-    return this.usersService.create(createUserDto);
+    return this.usersService.createOne(createUserDto);
   }
 
   @Get()
@@ -29,20 +29,20 @@ export class UsersController {
   }
 
   @Get(':id')
-  findById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
-    return this.usersService.findById(id);
+  findOneById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
+    return this.usersService.findOneById(id);
   }
 
   @Patch(':id')
-  updateById(
+  updateOneById(
     @Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId,
     @Body() updateUserDto: UpdateUserDto,
   ) {
-    return this.usersService.updateById(id, updateUserDto);
+    return this.usersService.updateOneById(id, updateUserDto);
   }
 
   @Delete(':id')
-  deleteById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
-    return this.usersService.deleteById(id);
+  deleteOneById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
+    return this.usersService.deleteOneById(id);
   }
 }
