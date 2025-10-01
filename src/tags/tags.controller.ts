@@ -8,15 +8,17 @@ import {
   Delete,
 } from '@nestjs/common';
 import { TagsService } from './tags.service';
-import type { CreateTagDto, UpdateTagDto } from './dto/tag.dto';
+import type { CreateTagDto, ParamId, UpdateTagDto } from './dto/tag.dto';
+import { createTagSchema, paramIdSchema, updateTagSchema, } from './dto/tag.dto';
+import { ZodValidationPipe } from '@/common/pipes/zod-validation.pipe';
 
 @Controller('tags')
 export class TagsController {
-  constructor(private readonly tagsService: TagsService) {}
+  constructor(private readonly tagsService: TagsService) { }
 
   @Post()
-  create(@Body() createTagDto: CreateTagDto) {
-    return this.tagsService.create(createTagDto);
+  createOne(@Body(new ZodValidationPipe(createTagSchema)) createTagDto: CreateTagDto) {
+    return this.tagsService.createOne(createTagDto);
   }
 
   @Get()
@@ -25,17 +27,17 @@ export class TagsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.tagsService.findOne(+id);
+  findOneById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
+    return this.tagsService.findOneById(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTagDto: UpdateTagDto) {
-    return this.tagsService.update(+id, updateTagDto);
+  updateOneById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId, @Body(new ZodValidationPipe(updateTagSchema)) updateTagDto: UpdateTagDto) {
+    return this.tagsService.updateOneById(id, updateTagDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.tagsService.remove(+id);
+  deleteOneById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
+    return this.tagsService.deleteOneById(id);
   }
 }

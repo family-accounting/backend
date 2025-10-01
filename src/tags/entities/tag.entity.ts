@@ -23,7 +23,7 @@ export class TagEntity extends BaseEntity {
   @Column({ type: 'text', nullable: true })
   description: string;
 
-  @Column({ type: 'varchar', length: 255, nullable: false })
+  @Column({ type: 'varchar', length: 255, nullable: true })
   color: string;
 
   @CreateDateColumn({ type: 'timestamp', nullable: false })
