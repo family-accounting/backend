@@ -1,4 +1,6 @@
 import type { CreatedAt, Id, UpdatedAt } from '@/common/types';
+import { RoleEntity } from '@/roles/entities/role.entity';
+import { TransactionEntity } from '@/transactions/entities/transaction.entity';
 import { UserEntity } from '@/users/entities/user.entity';
 import {
   CreateDateColumn,
@@ -10,6 +12,7 @@ import {
   ManyToOne,
   JoinColumn,
   BaseEntity,
+  OneToMany,
 } from 'typeorm';
 
 @Entity({ name: 'groups' })
@@ -37,4 +40,12 @@ export class GroupEntity extends BaseEntity {
   @ManyToOne(() => UserEntity, (user) => user.groups)
   @JoinColumn({ name: 'owner_id' })
   owner: UserEntity;
+
+  // relation with role
+  @ManyToMany(() => RoleEntity, (role) => role.groups)
+  roles: RoleEntity[];
+
+  // relation with transaction
+  @OneToMany(() => TransactionEntity, (transaction) => transaction.)
+  transactions: TransactionEntity[];
 }
