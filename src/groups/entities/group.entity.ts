@@ -46,6 +46,6 @@ export class GroupEntity extends BaseEntity {
   roles: RoleEntity[];
 
   // relation with transaction
-  @OneToMany(() => TransactionEntity, (transaction) => transaction.)
+  @OneToMany(() => TransactionEntity, (transaction) => transaction.group)
   transactions: TransactionEntity[];
 }
