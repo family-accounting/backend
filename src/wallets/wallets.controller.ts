@@ -8,15 +8,17 @@ import {
   Delete,
 } from '@nestjs/common';
 import { WalletsService } from './wallets.service';
-import type { CreateWalletDto, UpdateWalletDto } from './dto/wallet.dto';
+import type { CreateWalletDto, ParamId, UpdateWalletDto } from './dto/wallet.dto';
+import { createWalletSchema, paramIdSchema, updateWalletSchema } from './dto/wallet.dto';
+import { ZodValidationPipe } from '@/common/pipes/zod-validation.pipe';
 
 @Controller('wallets')
 export class WalletsController {
   constructor(private readonly walletsService: WalletsService) {}
 
   @Post()
-  create(@Body() createWalletDto: CreateWalletDto) {
-    return this.walletsService.create(createWalletDto);
+  createOne(@Body(new ZodValidationPipe(createWalletSchema)) createWalletDto: CreateWalletDto) {
+    return this.walletsService.createOne(createWalletDto);
   }
 
   @Get()
@@ -25,17 +27,17 @@ export class WalletsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.walletsService.findOne(+id);
+  findOneById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
+    return this.walletsService.findOneById(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateWalletDto: UpdateWalletDto) {
-    return this.walletsService.update(+id, updateWalletDto);
+  updateOneById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId, @Body(new ZodValidationPipe(updateWalletSchema)) updateWalletDto: UpdateWalletDto) {
+    return this.walletsService.updateOneById(id, updateWalletDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.walletsService.remove(+id);
+  deleteOneById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
+    return this.walletsService.deleteOneById(id);
   }
 }
