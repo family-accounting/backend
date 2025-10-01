@@ -18,7 +18,7 @@ export class AuthService {
   ) {}
 
   async register(dto: RegisterAuthDto) {
-    const user = await this.userService.create(dto);
+    const user = await this.userService.createOne(dto);
     const token = await this.jwtService.signAsync({
       id: user,
       mobile: user.mobile,
