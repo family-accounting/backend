@@ -15,7 +15,7 @@ export class TransactionsService {
     private readonly transactionRepository: Repository<TransactionEntity>,
   ) {}
 
-  create(dto: CreateTransactionDto) {
+  createOne(dto: CreateTransactionDto) {
     const transaction = this.transactionRepository.create(dto);
     return this.transactionRepository.save(transaction);
   }
@@ -24,15 +24,15 @@ export class TransactionsService {
     return this.transactionRepository.find();
   }
 
-  findById(id: Id) {
+  findOneById(id: Id) {
     return this.transactionRepository.findOneBy({ id });
   }
 
-  updateById(id: Id, dto: UpdateTransactionDto) {
+  updateOneById(id: Id, dto: UpdateTransactionDto) {
     return this.transactionRepository.update(id, dto);
   }
 
-  deleteById(id: Id) {
+  deleteOneById(id: Id) {
     return this.transactionRepository.delete(id);
   }
 }

@@ -21,11 +21,11 @@ export class TransactionsController {
   constructor(private readonly transactionsService: TransactionsService) {}
 
   @Post()
-  create(
+  createOne(
     @Body(new ZodValidationPipe(createTransactionSchema))
     dto: CreateTransactionDto,
   ) {
-    return this.transactionsService.create(dto);
+    return this.transactionsService.createOne(dto);
   }
 
   @Get()
@@ -34,20 +34,20 @@ export class TransactionsController {
   }
 
   @Get(':id')
-  findById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
-    return this.transactionsService.findById(id);
+  findOneById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
+    return this.transactionsService.findOneById(id);
   }
 
   @Patch(':id')
-  updateById(
+  updateOneById(
     @Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId,
     @Body() dto: UpdateTransactionDto,
   ) {
-    return this.transactionsService.updateById(id, dto);
+    return this.transactionsService.updateOneById(id, dto);
   }
 
   @Delete(':id')
-  deleteById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
-    return this.transactionsService.deleteById(id);
+  deleteOneById(@Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId) {
+    return this.transactionsService.deleteOneById(id);
   }
 }
