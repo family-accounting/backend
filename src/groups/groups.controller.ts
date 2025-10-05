@@ -8,10 +8,9 @@ import {
   Delete,
 } from '@nestjs/common';
 import { GroupsService } from './groups.service';
-import { CreateGroupDto } from './dto/group.dto';
 import { ZodValidationPipe } from '@/common/pipes/zod-validation.pipe';
-import { paramIdSchema } from './dto/group.dto';
-import type { ParamId } from './dto/group.dto';
+import type { ParamId, CreateGroupDto } from './dto/group.dto';
+import { paramIdSchema } from './schemas/group.schema';
 
 @Controller('groups')
 export class GroupsController {
