@@ -11,7 +11,7 @@ export class WalletsService {
     @InjectRepository(WalletEntity)
     private readonly walletRepository: Repository<WalletEntity>,
     private readonly i18n: I18nService,
-  ){}
+  ) {}
   createOne(createWalletDto: CreateWalletDto) {
     const wallet = this.walletRepository.create(createWalletDto);
     return this.walletRepository.save(wallet);
@@ -22,7 +22,7 @@ export class WalletsService {
   }
 
   findOneById(id: Id) {
-    return this.walletRepository.findOneBy({id});
+    return this.walletRepository.findOneBy({ id });
   }
 
   updateOneById(id: Id, updateWalletDto: UpdateWalletDto) {

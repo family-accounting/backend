@@ -8,7 +8,6 @@ import { Id } from '@/common/types';
 
 @Injectable()
 export class RolesService {
-
   constructor(
     @InjectRepository(RoleEntity)
     private readonly roleRepository: Repository<RoleEntity>,
@@ -16,26 +15,28 @@ export class RolesService {
   ) {}
 
   async createOne(createRoleDto: CreateRoleDto) {
-    const existRole = await this.roleRepository.findOneBy({name:createRoleDto.name})
-    if(existRole){
-      const message = this.i18n.t('errors.duplicate_role')
-      throw new BadRequestException(message)
+    const existRole = await this.roleRepository.findOneBy({
+      name: createRoleDto.name,
+    });
+    if (existRole) {
+      const message = this.i18n.t('errors.duplicate_role');
+      throw new BadRequestException(message);
     }
-    const role = this.roleRepository.create(createRoleDto)
+    const role = this.roleRepository.create(createRoleDto);
 
     return this.roleRepository.save(role);
   }
 
   findAll() {
-    return this.roleRepository.find()
+    return this.roleRepository.find();
   }
 
   findOneById(id: Id) {
-    return this.roleRepository.findOneBy({id});
+    return this.roleRepository.findOneBy({ id });
   }
 
   updateOneById(id: Id, updateRoleDto: UpdateRoleDto) {
-    return this.roleRepository.update(id,updateRoleDto);
+    return this.roleRepository.update(id, updateRoleDto);
   }
 
   deleteOneById(id: Id) {

@@ -10,7 +10,7 @@ export class ProfilesService {
   constructor(
     @InjectRepository(ProfileEntity)
     private readonly profileRepository: Repository<ProfileEntity>,
-    private readonly i18n: I18nService
+    private readonly i18n: I18nService,
   ) {}
   createOne(createProfileDto: CreateProfileDto) {
     const profile = this.profileRepository.create(createProfileDto);

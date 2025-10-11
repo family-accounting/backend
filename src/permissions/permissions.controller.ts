@@ -22,10 +22,13 @@ import { ZodValidationPipe } from '@/common/pipes/zod-validation.pipe';
 
 @Controller('permissions')
 export class PermissionsController {
-  constructor(private readonly permissionsService: PermissionsService) { }
+  constructor(private readonly permissionsService: PermissionsService) {}
 
   @Post()
-  createOne(@Body(new ZodValidationPipe(createPermissionSchema)) createPermissionDto: CreatePermissionDto) {
+  createOne(
+    @Body(new ZodValidationPipe(createPermissionSchema))
+    createPermissionDto: CreatePermissionDto,
+  ) {
     return this.permissionsService.createOne(createPermissionDto);
   }
 
@@ -42,7 +45,8 @@ export class PermissionsController {
   @Patch(':id')
   updateOneById(
     @Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId,
-    @Body(new ZodValidationPipe(updatePermissionSchema)) updatePermissionDto: UpdatePermissionDto,
+    @Body(new ZodValidationPipe(updatePermissionSchema))
+    updatePermissionDto: UpdatePermissionDto,
   ) {
     return this.permissionsService.updateOneById(id, updatePermissionDto);
   }

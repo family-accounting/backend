@@ -6,7 +6,7 @@ import type {
 import { PermissionEntity } from './entities/permission.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import type{ Id } from '@/common/types';
+import type { Id } from '@/common/types';
 import { I18nService } from 'nestjs-i18n';
 
 @Injectable()
@@ -38,7 +38,10 @@ export class PermissionsService {
   }
 
   async updateOneById(id: Id, updatePermissionDto: UpdatePermissionDto) {
-    const permission = await this.permissionRepository.update(id, updatePermissionDto);
+    const permission = await this.permissionRepository.update(
+      id,
+      updatePermissionDto,
+    );
     if (permission.affected === 0) {
       const message = this.i18n.t('errors.permission_not_found');
       throw new BadRequestException(message);

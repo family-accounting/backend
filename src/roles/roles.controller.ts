@@ -9,16 +9,22 @@ import {
 } from '@nestjs/common';
 import { RolesService } from './roles.service';
 
-import { createRoleSchema, paramIdSchema, updateRoleSchema, } from './dto/role.dto';
+import {
+  createRoleSchema,
+  paramIdSchema,
+  updateRoleSchema,
+} from './dto/role.dto';
 import type { ParamId, CreateRoleDto, UpdateRoleDto } from './dto/role.dto';
 import { ZodValidationPipe } from '@/common/pipes/zod-validation.pipe';
 
 @Controller('roles')
 export class RolesController {
-  constructor(private readonly rolesService: RolesService) { }
+  constructor(private readonly rolesService: RolesService) {}
 
   @Post()
-  createOne(@Body(new ZodValidationPipe(createRoleSchema)) createRoleDto: CreateRoleDto) {
+  createOne(
+    @Body(new ZodValidationPipe(createRoleSchema)) createRoleDto: CreateRoleDto,
+  ) {
     return this.rolesService.createOne(createRoleDto);
   }
 
@@ -35,7 +41,8 @@ export class RolesController {
   @Patch(':id')
   updateOneById(
     @Param(new ZodValidationPipe(paramIdSchema)) { id }: ParamId,
-    @Body(new ZodValidationPipe(updateRoleSchema)) updateRoleDto: UpdateRoleDto) {
+    @Body(new ZodValidationPipe(updateRoleSchema)) updateRoleDto: UpdateRoleDto,
+  ) {
     return this.rolesService.updateOneById(id, updateRoleDto);
   }
 

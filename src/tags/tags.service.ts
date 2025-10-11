@@ -12,7 +12,7 @@ export class TagsService {
     private readonly tagRepository: Repository<TagEntity>,
     private readonly i18n: I18nService,
   ) {}
-  
+
   createOne(createTagDto: CreateTagDto) {
     const tag = this.tagRepository.create(createTagDto);
     return this.tagRepository.save(tag);
@@ -23,7 +23,7 @@ export class TagsService {
   }
 
   findOneById(id: Id) {
-    return this.tagRepository.findOneBy({id});
+    return this.tagRepository.findOneBy({ id });
   }
 
   updateOneById(id: Id, updateTagDto: UpdateTagDto) {
